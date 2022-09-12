@@ -30,7 +30,7 @@ designColor.disabled = true;
 
 design.addEventListener('change', (e) => {
     designColor.disabled = false;
-    for (let i=0 ; i<designColor.children ; i++){
+    for (let i=0 ; i<designColor.children.length ; i++){
         const colorValue = e.target.value;
         const colorAtt = designColor[i].getAttribute('data-theme');
         console.log(colorValue);
