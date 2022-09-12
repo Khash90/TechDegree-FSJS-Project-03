@@ -15,6 +15,7 @@ otherJobRoll.style.display = 'none';
 //event to hide and unhide the "other text box" on change.
 jobRoll.addEventListener('change', (e) => {
     const otherJR = e.target.value;
+    
     // console.log(otherJR);
     if (otherJR === 'other' ){
         otherJobRoll.style.transition = 'all 0.5s ease-in-out';
@@ -29,12 +30,20 @@ jobRoll.addEventListener('change', (e) => {
 designColor.disabled = true;
 
 design.addEventListener('change', (e) => {
+    const colorChildren = designColor.children;
     designColor.disabled = false;
-    for (let i=0 ; i<designColor.children.length ; i++){
+    for (let i=0 ; i<colorChildren.length ; i++){
         const colorValue = e.target.value;
-        const colorAtt = designColor[i].getAttribute('data-theme');
+        const colorAtt = colorChildren[i].getAttribute('data-theme');
         console.log(colorValue);
         console.log(colorAtt);
+        if (colorValue === colorAtt){
+            colorChildren[i].hidden = false;
+            colorChildren[i].setAttribute('selected', true) ;
+        } else if(colorValue !== colorChildren){
+            colorChildren[i].hidden = true;
+            colorChildren[i].removeAttribute("selected");
+        }
     }
 });
 
