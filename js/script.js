@@ -2,7 +2,10 @@
 const name = document.querySelector("input[type='text']").focus();
 const jobRoll = document.getElementById('title');
 const otherJobRoll = document.getElementById('other-job-role');
+const design = document.getElementById('design');
+const designColor = document.getElementById('color');
 
+// console.log(designColor.children);
 // console.log(jobRoll)
 // console.log(otherJobRoll)
 
@@ -22,6 +25,15 @@ jobRoll.addEventListener('change', (e) => {
     }
 });
 
+//disabling the color menu by default
+designColor.disabled = true;
+
+design.addEventListener('change', (e) => {
+    designColor.disabled = false;
+    for (let i=0 ; i<designColor.children ; i++){
+        console.log(designColor);
+    }
+});
 
 
 
