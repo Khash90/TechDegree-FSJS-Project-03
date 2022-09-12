@@ -72,3 +72,36 @@ activityField.addEventListener('change', (e) => {
 });
 
 
+//"Payment Info" section
+//selecting payments elements
+const paymentMenu = document.getElementById('payment');
+const creditCard = document.getElementById('credit-card');
+const payPal = document.getElementById('paypal');
+const bitCoin = document.getElementById('bitcoin');
+
+//hiding paypal and bitcoin sections on pageload
+payPal.style.display = 'none';
+bitCoin.style.display = 'none';
+
+paymentMenu.children[1].setAttribute('selected',true);
+// console.log(paymentMenu);
+
+//setting listener for displaying related elements from payment menu
+paymentMenu.addEventListener('change',(e) => {
+    
+    if (e.target.value === 'paypal'){
+        creditCard.style.display = 'none';
+        bitCoin.style.display = 'none';
+        payPal.style.display = 'block';
+    } else {
+        creditCard.style.display = 'block';
+        bitCoin.style.display = 'none';
+        payPal.style.display = 'none';
+    }
+    if (e.target.value === 'bitcoin') {
+        creditCard.style.display = 'none';
+        payPal.style.display = 'none';
+        bitCoin.style.display = 'block';
+    }
+    
+});
