@@ -31,7 +31,10 @@ designColor.disabled = true;
 design.addEventListener('change', (e) => {
     designColor.disabled = false;
     for (let i=0 ; i<designColor.children ; i++){
-        console.log(designColor);
+        const colorValue = e.target.value;
+        const colorAtt = designColor[i].getAttribute('data-theme');
+        console.log(colorValue);
+        console.log(colorAtt);
     }
 });
 
