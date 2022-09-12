@@ -105,3 +105,18 @@ paymentMenu.addEventListener('change',(e) => {
     }
     
 });
+
+//submission
+
+//elements to work with
+   //Name ==> already have, variable name = "name";
+   const email = document.getElementById('email');
+   //The "Register for Activities" variable name = "paymentMenu"
+   const ccNumberBox = document.getElementById('cc-num');
+   const zipCodeBox = document.getElementById('zip');
+   const cvvBox = document.getElementById('cvv');
+
+   ccNumberBox.addEventListener('change', (e) => {
+    console.log(e.target.value)
+   });
+
