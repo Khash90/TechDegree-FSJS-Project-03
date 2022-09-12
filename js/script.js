@@ -29,6 +29,7 @@ jobRoll.addEventListener('change', (e) => {
 //disabling the color menu by default
 designColor.disabled = true;
 
+//eventlistener for theme selecting and its related colors.
 design.addEventListener('change', (e) => {
     const colorChildren = designColor.children;
     designColor.disabled = false;
@@ -42,10 +43,12 @@ design.addEventListener('change', (e) => {
             colorChildren[i].setAttribute('selected', true) ;
         } else if(colorValue !== colorChildren){
             colorChildren[i].hidden = true;
-            colorChildren[i].removeAttribute("selected");
+            colorChildren[i].setAttribute("selected", false);
         }
     }
 });
+
+
 
 
 
