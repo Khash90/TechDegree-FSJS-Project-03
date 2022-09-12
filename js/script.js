@@ -49,6 +49,26 @@ design.addEventListener('change', (e) => {
 });
 
 
+//"Register for Activities" section.
+const activityField = document.getElementById('activities');
+const total = document.getElementById('activities-cost');
+let totalCost = 0;
 
+// console.log(activityField);
+// console.log(total);
+
+activityField.addEventListener('change', (e) => {
+    const dataCost = +e.target.getAttribute('data-cost');
+    // console.log(typeof(dataCost));
+    if (e.target.checked){
+        totalCost += dataCost;
+        console.log('checked')
+    } else if(!e.target.checked){
+        totalCost -= dataCost;
+        
+    }
+    // console.log(totalCost)
+    total.innerHTML = `Total: $${totalCost}`;
+});
 
 
