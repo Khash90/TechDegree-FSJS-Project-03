@@ -1,10 +1,11 @@
 //Selecting Elements and Global Variables
-const name = document.querySelector("input[type='text']").focus();
+const name = document.getElementById("name");
 const jobRoll = document.getElementById('title');
 const otherJobRoll = document.getElementById('other-job-role');
 const design = document.getElementById('design');
 const designColor = document.getElementById('color');
 
+name.focus();
 // console.log(designColor.children);
 // console.log(jobRoll)
 // console.log(otherJobRoll)
@@ -115,8 +116,80 @@ paymentMenu.addEventListener('change',(e) => {
    const ccNumberBox = document.getElementById('cc-num');
    const zipCodeBox = document.getElementById('zip');
    const cvvBox = document.getElementById('cvv');
+   const form = document.querySelector('form');
 
-   ccNumberBox.addEventListener('change', (e) => {
-    console.log(e.target.value)
-   });
+
+
+//validation function
+function validationPass(element) {
+    element.parentElement.classList.add('valid');
+    element.parentElement.classList.remove('not-valid')
+    element.parentElement.lastElementChild.style.display = 'none';
+    
+}
+
+function validationFail(element) {
+    element.parentElement.classList.add('not-valid');
+    element.parentElement.classList.remove('valid')
+    element.parentElement.lastElementChild.style.display = 'block';
+    e.preventDefault();
+}
+
+
+/* Helper function to validate name input */
+const nameValidator = () => {
+
+    // Tests that there is at least a first name containing only letters, and allows for a middle and last name.
+    const nameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(name.value);
+  
+    if(nameIsValid){
+      validationPass(name);
+    }else {
+      validationFail(name);
+    }
+
+    return nameIsValid;
+}
+
+
+/* Helper function to validate email input */
+const emailValidator = () => {
+
+    // Tests that email is validly formatted.
+    const emailIsValid = /^[^@]+@[^@.]+\.[a-z]+$/i.test(email.value);
+  
+    
+    if(emailIsValid()){
+      validationPass(email);
+    }else {
+      validationFail(email);
+    }
+    return emailIsValid;
+}
+//    ccNumberBox.addEventListener('change', (e) => {
+//     console.log(e.target.value)
+//    });
+// form.addEventListener('click', (e) => {
+//     console.log('click click')
+//   })
+// name.addEventListener('change', ()=> {
+//     const nameValue = name.value;
+//     console.log(nameValue);
+// })
+
+form.addEventListener('submit' ,(e) => {
+
+    if (!nameValidator()) {
+        validationFail(name);
+        console.log('Invalid name prevented submission');
+        
+      }
+    
+      if (!emailValidator()) {
+        validationFail(email);
+        console.log('Invalid email prevented submission');
+        
+      }
+
+});
 
