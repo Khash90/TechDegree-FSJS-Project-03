@@ -252,12 +252,13 @@ const cvvValidator = (e) => {
 form.addEventListener('submit' ,(e) => {
     //  e.preventDefault();
      nameValidator(e);
-       
-         emailValidator(e);
+     emailValidator(e);
      activityValidator(e);
      ccNumberValidator(e);
      zipCodeValidator(e);
      cvvValidator(e);
+
+
 
 });
 
@@ -277,6 +278,10 @@ email.addEventListener('input', (e) => {
         emailValidator(e);
      }
 });
+
+activityField.addEventListener('change', (e)=> {
+    activityValidator(e);
+})
 ccNumberBox.addEventListener('input', (e) => {
     ccNumberValidator(e);
  });
@@ -284,3 +289,5 @@ zipCodeBox.addEventListener('input', (e) => {zipCodeValidator(e);})
 cvvBox.addEventListener('input', (e) => {
     cvvValidator(e);
  });
+
+
