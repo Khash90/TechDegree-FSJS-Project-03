@@ -131,8 +131,8 @@ function validationPass(element) {
 function validationFail(element) {
     element.parentElement.classList.add('not-valid');
     element.parentElement.classList.remove('valid')
-    element.parentElement.lastElementChild.style.display = 'block';
-    e.preventDefault();
+    element.parentElement.lastElementChild.style.display = 'inline';
+    
 }
 
 
@@ -144,11 +144,14 @@ const nameValidator = () => {
   
     if(nameIsValid){
       validationPass(name);
+      
     }else {
       validationFail(name);
+     
+      
     }
 
-    return nameIsValid;
+    
 }
 
 
@@ -159,37 +162,59 @@ const emailValidator = () => {
     const emailIsValid = /^[^@]+@[^@.]+\.[a-z]+$/i.test(email.value);
   
     
-    if(emailIsValid()){
+    if(emailIsValid){
       validationPass(email);
     }else {
       validationFail(email);
+     
     }
-    return emailIsValid;
+   
 }
-//    ccNumberBox.addEventListener('change', (e) => {
-//     console.log(e.target.value)
-//    });
-// form.addEventListener('click', (e) => {
-//     console.log('click click')
-//   })
-// name.addEventListener('change', ()=> {
-//     const nameValue = name.value;
-//     console.log(nameValue);
-// })
+
+// creadit card requirements validation
+const ccNumberValidator = () => {
+    const ccIsValid =  /^\d{13,16}$/.test(ccNumberBox.value);
+
+    if(ccIsValid){
+        validationPass(ccNumberBox);
+    }else{
+        validationFail(ccNumberBox);
+       
+    }
+    
+}
+
+const zipCodeValidator = () => {
+    const zipCodeValid = /^\d{5}$/.test(zipCodeBox.value);
+
+    if(zipCodeValid){
+        validationPass(zipCodeBox);
+        
+    }else{
+        validationFail(zipCodeBox);
+       
+    }
+    
+}
+
+const cvvValidator = () => {
+    const cvvValid = /^\d{3}$/.test(cvvBox.value);
+
+    if (cvvValid){
+        validationPass(cvvBox);
+    }else{
+        validationFail(cvvBox);
+    }
+}
 
 form.addEventListener('submit' ,(e) => {
+     e.preventDefault();
 
-    if (!nameValidator()) {
-        validationFail(name);
-        console.log('Invalid name prevented submission');
-        
-      }
-    
-      if (!emailValidator()) {
-        validationFail(email);
-        console.log('Invalid email prevented submission');
-        
-      }
+     nameValidator();
+     emailValidator();
+     ccNumberValidator();
+     zipCodeValidator();
+     cvvValidator();
 
 });
 
