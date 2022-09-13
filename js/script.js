@@ -216,29 +216,29 @@ const expMonth = document.getElementById('exp-month');
 const expMonthValidator = (e) => {
    
     
-    if (expMonth.firstChild){
-        e.preventDefault();
-        expMonth.parentElement.classList.add('not-valid')
-    } 
-    if (!expMonth.firstChild){
-        e.preventDefault();
-        expMonth.parentElement.classList.add('valid');
-        expMonth.parentElement.classList.remove('not-valid');
-    } 
-
-    // for (let i=0 ; i<selecting.length ; i++) {
-    //     const childrenValuee = selecting[i].value;
-    //     const childrenAtt = selecting[i].getAttribute('value');
-    //     console.log(childrenValuee);
-    //     console.log(childrenAtt);
-    //     if (selecting[i] === "Select Date") {
-    //         e.preventDefault();
-    //         expMonth.parentElement.classList.add('not-valid');
-    //     } else {
-    //         expMonth.parentElement.classList.remove('not-valid');
-    //         expMonth.parentElement.classList.add('valid');
-    //     }
-    // }
+    // if (expMonth.firstChild){
+    //     e.preventDefault();
+    //     expMonth.parentElement.classList.add('not-valid')
+    // } 
+    // if (!expMonth.firstChild){
+    //     e.preventDefault();
+    //     expMonth.parentElement.classList.add('valid');
+    //     expMonth.parentElement.classList.remove('not-valid');
+    // } 
+    const selecting = expMonth.children;
+    for (let i=0 ; i<selecting.length ; i++) {
+        const childrenValuee = selecting[i].value;
+        const childrenAtt = selecting[i].getAttribute('value');
+        console.log(childrenValuee);
+        console.log(childrenAtt);
+        if (childrenAtt === 0) {
+            e.preventDefault();
+            expMonth.parentElement.classList.add('not-valid');
+        } else {
+            expMonth.parentElement.classList.remove      ('not-valid');
+            expMonth.parentElement.classList.add('valid');
+        }
+    }
 }
 
 const ccNumberValidator = (e) => {
