@@ -5,6 +5,7 @@ const otherJobRoll = document.getElementById('other-job-role');
 const design = document.getElementById('design');
 const designColor = document.getElementById('color');
 
+//putting focus on name textbox on page load.
 name.focus();
 // console.log(designColor.children);
 // console.log(jobRoll)
@@ -26,6 +27,7 @@ jobRoll.addEventListener('change', (e) => {
         otherJobRoll.style.display = 'none';
     }
 });
+
 
 //disabling the color menu by default
 designColor.disabled = true;
@@ -50,8 +52,9 @@ design.addEventListener('change', (e) => {
 });
 
 
-//"Register for Activities" section.
+/* ------------ "Register for Activities" section. ------------ */
 const activityField = document.getElementById('activities');
+const checkBoxes = document.querySelectorAll('input[type="checkbox"]');
 const total = document.getElementById('activities-cost');
 let totalCost = 0;
 
@@ -61,19 +64,45 @@ let totalCost = 0;
 activityField.addEventListener('change', (e) => {
     const dataCost = +e.target.getAttribute('data-cost');
     // console.log(typeof(dataCost));
-    if (e.target.checked){
+    const clicked = e.target;
+    const clickedType = clicked.getAttribute('data-day-and-time')
+  
+    //Not allowing the user to check 2 events with the same date-day-and-time
+    for(let i=0 ; i<checkBoxes.length ; i++) {
+        const checkboxType = checkBoxes[i].getAttribute('data-day-and-time');
+        if(clickedType === checkboxType && clicked !== checkBoxes[i]) {
+        if(clicked.checked){
+          checkBoxes[i].disabled = true;
+        }else{
+          checkBoxes[i].disabled = false;
+        }
+      }
+   }
+   //calculating the total cost of checked programs
+    if (e.target.checked ){
         totalCost += dataCost;
-        console.log('checked')
-    } else if(!e.target.checked){
+        // console.log('checked')
+    } else if(!e.target.checked ){
         totalCost -= dataCost;
         
     }
     // console.log(totalCost)
     total.innerHTML = `Total: $${totalCost}`;
-});
+    });
+
+    //adding focus and blur for checkboxes
+    for (let i=0 ; i<checkBoxes.length ; i++){
+        checkBoxes[i].addEventListener('focus', (e) => {
+            e.target.parentElement.classList.add('focus');
+        });
+        checkBoxes[i].addEventListener('blur', (e) => {
+            e.target.parentElement.classList.remove('focus');
+        });
+}
 
 
-//"Payment Info" section
+/*----------"Payment Info" section----------*/
+
 //selecting payments elements
 const paymentMenu = document.getElementById('payment');
 const creditCard = document.getElementById('credit-card');
@@ -84,6 +113,7 @@ const bitCoin = document.getElementById('bitcoin');
 payPal.style.display = 'none';
 bitCoin.style.display = 'none';
 
+//setting credit card payment on default
 paymentMenu.children[1].setAttribute('selected',true);
 // console.log(paymentMenu);
 
@@ -107,8 +137,8 @@ paymentMenu.addEventListener('change',(e) => {
     
 });
 
-//submission
 
+/*--------- Validation sections ---------*/
 //elements to work with
    //Name ==> already have, variable name = "name";
    const email = document.getElementById('email');
@@ -120,12 +150,11 @@ paymentMenu.addEventListener('change',(e) => {
 
 
 
-//validation function
+//validation function = "pass and fail"
 function validationPass(element) {
     element.parentElement.classList.add('valid');
     element.parentElement.classList.remove('not-valid')
     element.parentElement.lastElementChild.style.display = 'none';
-    
 }
 
 function validationFail(element) {
@@ -138,10 +167,8 @@ function validationFail(element) {
 
 /* Helper function to validate name input */
 const nameValidator = () => {
-
     // Tests that there is at least a first name containing only letters, and allows for a middle and last name.
     const nameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(name.value);
-  
     if(nameIsValid){
       validationPass(name);
     } else {
@@ -165,15 +192,16 @@ const emailValidator = () => {
 }
 /*------------- activity validation-------------*/
 
-const checkBoxes = document.querySelectorAll('input[type="checkbox"]');
-for (let i=0 ; i<checkBoxes.length ; i++){
-    checkBoxes[i].addEventListener('focus', (e) => {
-        e.target.parentElement.classList.add('focus');
-    });
-    checkBoxes[i].addEventListener('blur', (e) => {
-        e.target.parentElement.classList.remove('focus');
-    });
-}
+
+// const activtyValidator = () => {
+//     if(activityField.checked){
+//         validationPass(activityField)
+//     } else {
+//         validationFail(activityField)
+//     }
+// }
+
+
 
 /*------------- creadit card requirements validation-------------*/
 const ccNumberValidator = () => {
@@ -215,9 +243,11 @@ form.addEventListener('submit' ,(e) => {
 
      nameValidator();
      emailValidator();
+    //  activtyValidator();
      ccNumberValidator();
      zipCodeValidator();
      cvvValidator();
 
 });
+
 
