@@ -7,6 +7,7 @@
 I have provided real time input checking on :
 1)name field
 2)email field
-3)creditcard number
-4)zip code
-5)cvv
+3)Activities field
+4)creditcard number
+5)zip code
+6)cvv
