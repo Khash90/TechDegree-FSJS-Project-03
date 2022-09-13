@@ -20,7 +20,7 @@ jobRoll.addEventListener('change', (e) => {
     
     // console.log(otherJR);
     if (otherJR === 'other' ){
-        otherJobRoll.style.transition = 'all 0.5s ease-in-out';
+        
         otherJobRoll.style.display = 'block';
         
     } else {
@@ -161,7 +161,7 @@ function validationPass(element) {
 function validationFail(element) {
     element.parentElement.classList.add('not-valid');
     element.parentElement.classList.remove('valid')
-    element.parentElement.lastElementChild.style.display = 'inline';
+    element.parentElement.lastElementChild.style.display = 'block';
     
 }
 
