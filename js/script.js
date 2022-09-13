@@ -71,11 +71,11 @@ activityField.addEventListener('change', (e) => {
     for(let i=0 ; i<checkBoxes.length ; i++) {
         const checkboxType = checkBoxes[i].getAttribute('data-day-and-time');
         if(clickedType === checkboxType && clicked !== checkBoxes[i]) {
-        if(clicked.checked){
+          if(clicked.checked){
           checkBoxes[i].disabled = true;
-        }else{
+          }else{
           checkBoxes[i].disabled = false;
-        }
+          }
       }
    }
    //calculating the total cost of checked programs
@@ -193,13 +193,15 @@ const emailValidator = () => {
 /*------------- activity validation-------------*/
 
 
-// const activtyValidator = () => {
-//     if(activityField.checked){
-//         validationPass(activityField)
-//     } else {
-//         validationFail(activityField)
-//     }
-// }
+const activityValidator = () => {
+    const checked = document.querySelectorAll("input[type='checkbox']:checked");
+    const checkedAmount = checked.length;
+    if(checkedAmount !== 0){
+        validationPass(activityField)
+    } else {
+        validationFail(activityField)
+    }
+}
 
 
 
@@ -243,7 +245,7 @@ form.addEventListener('submit' ,(e) => {
 
      nameValidator();
      emailValidator();
-    //  activtyValidator();
+     activityValidator();
      ccNumberValidator();
      zipCodeValidator();
      cvvValidator();
