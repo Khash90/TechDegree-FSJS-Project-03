@@ -144,14 +144,9 @@ const nameValidator = () => {
   
     if(nameIsValid){
       validationPass(name);
-      
-    }else {
-      validationFail(name);
-     
-      
-    }
-
-    
+    } else {
+      validationFail(name); 
+    }    
 }
 
 
@@ -160,18 +155,27 @@ const emailValidator = () => {
 
     // Tests that email is validly formatted.
     const emailIsValid = /^[^@]+@[^@.]+\.[a-z]+$/i.test(email.value);
-  
-    
     if(emailIsValid){
       validationPass(email);
-    }else {
+     } else {
       validationFail(email);
      
     }
    
 }
+/*------------- activity validation-------------*/
 
-// creadit card requirements validation
+const checkBoxes = document.querySelectorAll('input[type="checkbox"]');
+for (let i=0 ; i<checkBoxes.length ; i++){
+    checkBoxes[i].addEventListener('focus', (e) => {
+        e.target.parentElement.classList.add('focus');
+    });
+    checkBoxes[i].addEventListener('blur', (e) => {
+        e.target.parentElement.classList.remove('focus');
+    });
+}
+
+/*------------- creadit card requirements validation-------------*/
 const ccNumberValidator = () => {
     const ccIsValid =  /^\d{13,16}$/.test(ccNumberBox.value);
 
@@ -181,7 +185,6 @@ const ccNumberValidator = () => {
         validationFail(ccNumberBox);
        
     }
-    
 }
 
 const zipCodeValidator = () => {
