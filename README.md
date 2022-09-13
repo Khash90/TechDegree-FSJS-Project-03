@@ -8,6 +8,8 @@ I have provided real time input checking on :
 1)name field
 2)email field
 3)Activities field
-4)creditcard number
-5)zip code
-6)cvv
+4)exp-date
+5)exp-year
+6)creditcard number
+7)zip code
+8)cvv
