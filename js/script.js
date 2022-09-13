@@ -212,23 +212,33 @@ const activityValidator = (e) => {
 
 /*------------- creadit card requirements validation-------------*/
 const expMonth = document.getElementById('exp-month');
-const expMonthValidator = (e) => {
 
-    const selecting = expMonth.children;
-    for (let i=0 ; i<selecting.length ; i++) {
-        const childrenValue = e.target.value;
-        const childrenAtt = selecting[i].getAttribute('value');
-        console.log(childrenValue);
-        console.log(childrenAtt);
-        if (childrenValue !== childrenAtt) {
-            e.preventDefault();
-            expMonth.parentElement.classList.add('not-valid');
-        } else if(childrenValue === childrenAtt) {
-            expMonth.parentElement.classList.remove('not-valid');
-            expMonth.parentElement.classList.add('valid');
-        }
-    }
+const expMonthValidator = (e) => {
    
+    
+    if (expMonth.firstChild){
+        e.preventDefault();
+        expMonth.parentElement.classList.add('not-valid')
+    } 
+    if (!expMonth.firstChild){
+        e.preventDefault();
+        expMonth.parentElement.classList.add('valid');
+        expMonth.parentElement.classList.remove('not-valid');
+    } 
+
+    // for (let i=0 ; i<selecting.length ; i++) {
+    //     const childrenValuee = selecting[i].value;
+    //     const childrenAtt = selecting[i].getAttribute('value');
+    //     console.log(childrenValuee);
+    //     console.log(childrenAtt);
+    //     if (selecting[i] === "Select Date") {
+    //         e.preventDefault();
+    //         expMonth.parentElement.classList.add('not-valid');
+    //     } else {
+    //         expMonth.parentElement.classList.remove('not-valid');
+    //         expMonth.parentElement.classList.add('valid');
+    //     }
+    // }
 }
 
 const ccNumberValidator = (e) => {
