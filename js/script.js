@@ -148,7 +148,7 @@ paymentMenu.addEventListener('change',(e) => {
    const zipCodeBox = document.getElementById('zip');
    const cvvBox = document.getElementById('cvv');
    const form = document.querySelector('form');
-
+   const blankMailMsg = document.getElementById('email-hint2');
 
 
 //validation function = "pass and fail"
@@ -182,15 +182,15 @@ const nameValidator = (e) => {
 
 /* Helper function to validate email input */
 const emailValidator = (e) => {
-
+    
     // Tests that email is validly formatted.
     const emailIsValid = /^[^@]+@[^@.]+\.[a-z]+$/i.test(email.value);
+    
     if(emailIsValid){
       validationPass(email);
      } else if(!emailIsValid) {
         e.preventDefault();
       validationFail(email);
-     
     }
    
 }
@@ -252,7 +252,16 @@ form.addEventListener('submit' ,(e) => {
     //  e.preventDefault();
 
      nameValidator(e);
-     emailValidator(e);
+     if(email.value === ""){
+        e.preventDefault();
+        email.parentElement.lastElementChild.style.display = 'none';
+        blankMailMsg.parentElement.classList.add("not-valid");
+        blankMailMsg.style.display = 'block';
+     } else {
+        blankMailMsg.style.display = 'none';
+        emailValidator(e);
+     }
+     
      activityValidator(e);
      ccNumberValidator(e);
      zipCodeValidator(e);
