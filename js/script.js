@@ -172,6 +172,7 @@ const nameValidator = (e) => {
     const nameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(name.value);
     if(nameIsValid){
       validationPass(name);
+      return true;
     } else if(!nameIsValid) {
       e.preventDefault();
       validationFail(name); 
@@ -195,15 +196,15 @@ const emailValidator = (e) => {
 }
 /*------------- activity validation-------------*/
 
-
+const activityBox = document.getElementById('activities-box')
 const activityValidator = (e) => {
     const checked = document.querySelectorAll("input[type='checkbox']:checked");
     const checkedAmount = checked.length;
     if(checkedAmount){
-        validationPass(activityField)
+        validationPass(activityBox)
     } else if(!checkedAmount) {
         e.preventDefault();
-        validationFail(activityField)
+        validationFail(activityBox)
     }
 }
 
