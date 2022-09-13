@@ -167,25 +167,27 @@ function validationFail(element) {
 
 
 /* Helper function to validate name input */
-const nameValidator = () => {
+const nameValidator = (e) => {
     // Tests that there is at least a first name containing only letters, and allows for a middle and last name.
     const nameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(name.value);
     if(nameIsValid){
       validationPass(name);
-    } else {
+    } else if(!nameIsValid) {
+      e.preventDefault();
       validationFail(name); 
     }    
 }
 
 
 /* Helper function to validate email input */
-const emailValidator = () => {
+const emailValidator = (e) => {
 
     // Tests that email is validly formatted.
     const emailIsValid = /^[^@]+@[^@.]+\.[a-z]+$/i.test(email.value);
     if(emailIsValid){
       validationPass(email);
-     } else {
+     } else if(!emailIsValid) {
+        e.preventDefault();
       validationFail(email);
      
     }
@@ -194,12 +196,13 @@ const emailValidator = () => {
 /*------------- activity validation-------------*/
 
 
-const activityValidator = () => {
+const activityValidator = (e) => {
     const checked = document.querySelectorAll("input[type='checkbox']:checked");
     const checkedAmount = checked.length;
-    if(checkedAmount !== 0){
+    if(checkedAmount){
         validationPass(activityField)
-    } else {
+    } else if(!checkedAmount) {
+        e.preventDefault();
         validationFail(activityField)
     }
 }
@@ -207,49 +210,52 @@ const activityValidator = () => {
 
 
 /*------------- creadit card requirements validation-------------*/
-const ccNumberValidator = () => {
+const ccNumberValidator = (e) => {
     const ccIsValid =  /^\d{13,16}$/.test(ccNumberBox.value);
 
     if(ccIsValid){
         validationPass(ccNumberBox);
-    }else{
+    }else if(!ccIsValid) {
+        e.preventDefault();
         validationFail(ccNumberBox);
        
     }
 }
 
-const zipCodeValidator = () => {
+const zipCodeValidator = (e) => {
     const zipCodeValid = /^\d{5}$/.test(zipCodeBox.value);
 
     if(zipCodeValid){
         validationPass(zipCodeBox);
         
-    }else{
+    }else if(!zipCodeValid) {
+        e.preventDefault();
         validationFail(zipCodeBox);
        
     }
     
 }
 
-const cvvValidator = () => {
+const cvvValidator = (e) => {
     const cvvValid = /^\d{3}$/.test(cvvBox.value);
 
     if (cvvValid){
         validationPass(cvvBox);
-    }else{
+    }else if(!cvvValid){
+        e.preventDefault();
         validationFail(cvvBox);
     }
 }
 
 form.addEventListener('submit' ,(e) => {
-     e.preventDefault();
+    //  e.preventDefault();
 
-     nameValidator();
-     emailValidator();
-     activityValidator();
-     ccNumberValidator();
-     zipCodeValidator();
-     cvvValidator();
+     nameValidator(e);
+     emailValidator(e);
+     activityValidator(e);
+     ccNumberValidator(e);
+     zipCodeValidator(e);
+     cvvValidator(e);
 
 });
 
