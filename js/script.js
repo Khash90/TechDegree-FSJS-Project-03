@@ -186,14 +186,20 @@ const emailValidator = (e) => {
     // Tests that email is validly formatted.
     const emailIsValid = /^[^@]+@[^@.]+\.[a-z]+$/i.test(email.value);
     
-    if(emailIsValid){
+    if(emailIsValid) {
+
       validationPass(email);
-     } else if(!emailIsValid) {
+     } else if(!emailIsValid && email.value === "") {
+        email.parentElement.lastElementChild.style.display = 'none';
+        blankMailMsg.parentElement.classList.add("not-valid");
+        blankMailMsg.style.display = 'block';
         e.preventDefault();
-      validationFail(email);
+     }else if(!emailIsValid){
+        validationFail(email);
+      }
     }
    
-}
+
 /*------------- activity validation-------------*/
 
 const activityBox = document.getElementById('activities-box')
