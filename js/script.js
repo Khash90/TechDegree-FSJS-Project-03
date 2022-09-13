@@ -211,33 +211,33 @@ const activityValidator = (e) => {
 
 
 /*------------- creadit card requirements validation-------------*/
-const expMonth = document.getElementById('exp-month');
 
+
+//validating expiration date
+const expMonth = document.getElementById('exp-month');
 const expMonthValidator = (e) => {
    
-    
-    // if (expMonth.firstChild){
-    //     e.preventDefault();
-    //     expMonth.parentElement.classList.add('not-valid')
-    // } 
-    // if (!expMonth.firstChild){
-    //     e.preventDefault();
-    //     expMonth.parentElement.classList.add('valid');
-    //     expMonth.parentElement.classList.remove('not-valid');
-    // } 
-    const selecting = expMonth.children;
-    for (let i=0 ; i<selecting.length ; i++) {
-        const childrenValuee = selecting[i].value;
-        const childrenAtt = selecting[i].getAttribute('value');
-        console.log(childrenValuee);
-        console.log(childrenAtt);
-        if (childrenAtt === 0) {
-            e.preventDefault();
-            expMonth.parentElement.classList.add('not-valid');
-        } else {
-            expMonth.parentElement.classList.remove      ('not-valid');
-            expMonth.parentElement.classList.add('valid');
-        }
+    const div = document.querySelector('.month-box')
+    console.log(expMonth.value);
+    if(expMonth.value === '0') {
+        div.classList.add('not-valid')
+        div.classList.remove('valid')
+    } else {
+        div.classList.add('valid');
+        div.classList.remove('not-valid')
+    }
+}
+//validating expiration year
+const expYear = document.getElementById('exp-year');
+const expYearValidator = (e) => {
+    const div = document.querySelector('.year-box')
+    console.log(expYear.value);
+    if(expYear.value === '0') {
+        div.classList.add('not-valid');
+        div.classList.remove('valid');
+    } else {
+        div.classList.add('valid');
+        div.classList.remove('not-valid');
     }
 }
 
@@ -285,6 +285,7 @@ form.addEventListener('submit' ,(e) => {
      emailValidator(e);
      activityValidator(e);
      expMonthValidator(e);
+     expYearValidator(e);
      ccNumberValidator(e);
      zipCodeValidator(e);
      cvvValidator(e);
@@ -310,9 +311,18 @@ email.addEventListener('input', (e) => {
      }
 });
 
+
 activityField.addEventListener('change', (e)=> {
     activityValidator(e);
-})
+});
+
+expMonth.addEventListener('change', (e) => {
+    expMonthValidator(e);
+});
+
+expYear.addEventListener('change', (e) => {
+    expYearValidator(e)
+});
 ccNumberBox.addEventListener('input', (e) => {
     ccNumberValidator(e);
  });
