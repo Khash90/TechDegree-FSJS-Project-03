@@ -248,11 +248,26 @@ const cvvValidator = (e) => {
     }
 }
 
+//form listener on submit
 form.addEventListener('submit' ,(e) => {
     //  e.preventDefault();
-
      nameValidator(e);
-     if(email.value === ""){
+       
+         emailValidator(e);
+     activityValidator(e);
+     ccNumberValidator(e);
+     zipCodeValidator(e);
+     cvvValidator(e);
+
+});
+
+/* EventListener for Real Time */
+
+name.addEventListener('input', (e) => {
+    nameValidator(e);
+});
+email.addEventListener('input', (e) => {
+    if(email.value === ""){
         e.preventDefault();
         email.parentElement.lastElementChild.style.display = 'none';
         blankMailMsg.parentElement.classList.add("not-valid");
@@ -261,12 +276,11 @@ form.addEventListener('submit' ,(e) => {
         blankMailMsg.style.display = 'none';
         emailValidator(e);
      }
-     
-     activityValidator(e);
-     ccNumberValidator(e);
-     zipCodeValidator(e);
-     cvvValidator(e);
-
 });
-
-
+ccNumberBox.addEventListener('input', (e) => {
+    ccNumberValidator(e);
+ });
+zipCodeBox.addEventListener('input', (e) => {zipCodeValidator(e);})
+cvvBox.addEventListener('input', (e) => {
+    cvvValidator(e);
+ });
