@@ -125,6 +125,7 @@ paymentMenu.addEventListener('change',(e) => {
         creditCard.style.display = 'none';
         bitCoin.style.display = 'none';
         payPal.style.display = 'block';
+        return true
     } else {
         creditCard.style.display = 'block';
         bitCoin.style.display = 'none';
@@ -134,6 +135,7 @@ paymentMenu.addEventListener('change',(e) => {
         creditCard.style.display = 'none';
         payPal.style.display = 'none';
         bitCoin.style.display = 'block';
+        return true;
     }
     
 });
