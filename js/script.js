@@ -319,7 +319,6 @@ form.addEventListener('submit' ,(e) => {
        cvvValidator(e);
      }else if (paymentMenu.children[2] || paymentMenu.children[3]){
         bitAndPalValidator();
-    
      }
     
   
