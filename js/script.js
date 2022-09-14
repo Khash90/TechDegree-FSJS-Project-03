@@ -125,7 +125,7 @@ paymentMenu.addEventListener('change',(e) => {
         creditCard.style.display = 'none';
         bitCoin.style.display = 'none';
         payPal.style.display = 'block';
-        return true
+        
     } else {
         creditCard.style.display = 'block';
         bitCoin.style.display = 'none';
@@ -135,7 +135,7 @@ paymentMenu.addEventListener('change',(e) => {
         creditCard.style.display = 'none';
         payPal.style.display = 'none';
         bitCoin.style.display = 'block';
-        return true;
+        
     }
     
 });
@@ -158,13 +158,14 @@ function validationPass(element) {
     element.parentElement.classList.add('valid');
     element.parentElement.classList.remove('not-valid')
     element.parentElement.lastElementChild.style.display = 'none';
+    return true;
 }
 
 function validationFail(element) {
     element.parentElement.classList.add('not-valid');
     element.parentElement.classList.remove('valid')
     element.parentElement.lastElementChild.style.display = 'block';
-    
+    return false;
 }
 
 
@@ -174,7 +175,7 @@ const nameValidator = (e) => {
     const nameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(name.value);
     if(nameIsValid){
       validationPass(name);
-      return true;
+    
     } else if(!nameIsValid) {
       e.preventDefault();
       validationFail(name); 
@@ -198,11 +199,10 @@ const emailValidator = (e) => {
         blankMailMsg.parentElement.classList.add("not-valid");
         blankMailMsg.style.display = 'block';
         
-        return false;
      }else if(!emailIsValid){
         e.preventDefault();
         validationFail(email);
-        return false
+        
       }
     }
    
@@ -215,11 +215,11 @@ const activityValidator = (e) => {
     const checkedAmount = checked.length;
     if(checkedAmount){
         validationPass(activityBox);
-        return true
+        
     } else if(!checkedAmount) {
         e.preventDefault();
         validationFail(activityBox)
-        return false;
+       
     }
 }
 
@@ -237,11 +237,11 @@ const expMonthValidator = (e) => {
     if(expMonth.value === '0') {
         div.classList.add('not-valid')
         div.classList.remove('valid')
-        return false;
+        
     } else {
         div.classList.add('valid');
         div.classList.remove('not-valid')
-        return true
+        
     }
 }
 //validating expiration year
@@ -252,11 +252,11 @@ const expYearValidator = (e) => {
     if(expYear.value === '0') {
         div.classList.add('not-valid');
         div.classList.remove('valid');
-        return false;
+        
     } else {
         div.classList.add('valid');
         div.classList.remove('not-valid');
-        return true;
+       
     }
 }
 
@@ -265,11 +265,11 @@ const ccNumberValidator = (e) => {
 
     if(ccIsValid){
         validationPass(ccNumberBox);
-        return true;
+      
     }else if(!ccIsValid) {
         e.preventDefault();
         validationFail(ccNumberBox);
-        return false;
+        
        
     }
 }
@@ -279,11 +279,11 @@ const zipCodeValidator = (e) => {
 
     if(zipCodeValid){
         validationPass(zipCodeBox);
-        return true;
+        
     }else if(!zipCodeValid) {
         e.preventDefault();
-        validationFail(zipCodeBox);
-       return false;
+        validationFail(zipCodeBox)
+      
     }
     
 }
@@ -293,25 +293,39 @@ const cvvValidator = (e) => {
 
     if (cvvValid){
         validationPass(cvvBox);
-        return true;
+      
     }else if(!cvvValid){
         e.preventDefault();
         validationFail(cvvBox);
-        return false;
+        
     }
 }
-
+const bitAndPalValidator = (e) => {
+    if (e.targe.value === 'bitcoin' || e.target.value === "paypal") {
+        return true;
+    }
+}
 //form listener on submit
 form.addEventListener('submit' ,(e) => {
     //  e.preventDefault();
      nameValidator(e);
      emailValidator(e);
      activityValidator(e);
-     expMonthValidator(e);
-     expYearValidator(e);
-     ccNumberValidator(e);
-     zipCodeValidator(e);
-     cvvValidator(e);
+     if (paymentMenu.children[1]){
+        expMonthValidator(e);
+        expYearValidator(e);
+       ccNumberValidator(e);
+       zipCodeValidator(e);
+       cvvValidator(e);
+     }else if (paymentMenu.children[2] || paymentMenu.children[3]){
+        bitAndPalValidator();
+    
+     }
+    
+  
+     
+     
+     
 });
 
 /* EventListener for Real Time */
