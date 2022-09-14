@@ -189,13 +189,18 @@ const emailValidator = (e) => {
     if(emailIsValid) {
 
       validationPass(email);
+      return true;
      } else if(!emailIsValid && email.value === "") {
+        e.preventDefault();
         email.parentElement.lastElementChild.style.display = 'none';
         blankMailMsg.parentElement.classList.add("not-valid");
         blankMailMsg.style.display = 'block';
-        e.preventDefault();
+        
+        return false;
      }else if(!emailIsValid){
+        e.preventDefault();
         validationFail(email);
+        return false
       }
     }
    
@@ -207,10 +212,12 @@ const activityValidator = (e) => {
     const checked = document.querySelectorAll("input[type='checkbox']:checked");
     const checkedAmount = checked.length;
     if(checkedAmount){
-        validationPass(activityBox)
+        validationPass(activityBox);
+        return true
     } else if(!checkedAmount) {
         e.preventDefault();
         validationFail(activityBox)
+        return false;
     }
 }
 
@@ -228,9 +235,11 @@ const expMonthValidator = (e) => {
     if(expMonth.value === '0') {
         div.classList.add('not-valid')
         div.classList.remove('valid')
+        return false;
     } else {
         div.classList.add('valid');
         div.classList.remove('not-valid')
+        return true
     }
 }
 //validating expiration year
@@ -241,9 +250,11 @@ const expYearValidator = (e) => {
     if(expYear.value === '0') {
         div.classList.add('not-valid');
         div.classList.remove('valid');
+        return false;
     } else {
         div.classList.add('valid');
         div.classList.remove('not-valid');
+        return true;
     }
 }
 
@@ -252,9 +263,11 @@ const ccNumberValidator = (e) => {
 
     if(ccIsValid){
         validationPass(ccNumberBox);
+        return true;
     }else if(!ccIsValid) {
         e.preventDefault();
         validationFail(ccNumberBox);
+        return false;
        
     }
 }
@@ -264,11 +277,11 @@ const zipCodeValidator = (e) => {
 
     if(zipCodeValid){
         validationPass(zipCodeBox);
-        
+        return true;
     }else if(!zipCodeValid) {
         e.preventDefault();
         validationFail(zipCodeBox);
-       
+       return false;
     }
     
 }
@@ -278,9 +291,11 @@ const cvvValidator = (e) => {
 
     if (cvvValid){
         validationPass(cvvBox);
+        return true;
     }else if(!cvvValid){
         e.preventDefault();
         validationFail(cvvBox);
+        return false;
     }
 }
 
@@ -295,9 +310,6 @@ form.addEventListener('submit' ,(e) => {
      ccNumberValidator(e);
      zipCodeValidator(e);
      cvvValidator(e);
-
-
-
 });
 
 /* EventListener for Real Time */
@@ -334,7 +346,7 @@ ccNumberBox.addEventListener('input', (e) => {
  });
 zipCodeBox.addEventListener('input', (e) => {zipCodeValidator(e);})
 cvvBox.addEventListener('input', (e) => {
-    cvvValidator(e);
+cvvValidator(e);
  });
 
 
