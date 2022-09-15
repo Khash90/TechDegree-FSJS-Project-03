@@ -311,21 +311,18 @@ form.addEventListener('submit' ,(e) => {
      nameValidator(e);
      emailValidator(e);
      activityValidator(e);
-     if (paymentMenu.target.value === 'Credit Card'){
+     if (paymentMenu.value === 'credit-card'){
         expMonthValidator(e);
         expYearValidator(e);
         ccNumberValidator(e);
         zipCodeValidator(e);
         cvvValidator(e);
-     }
-   
-    
   
-     
+     };
      
      
 });
-
+console.log(paymentMenu.value)
 /* EventListener for Real Time */
 
 name.addEventListener('input', (e) => {
