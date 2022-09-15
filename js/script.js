@@ -317,12 +317,11 @@ form.addEventListener('submit' ,(e) => {
         ccNumberValidator(e);
         zipCodeValidator(e);
         cvvValidator(e);
-  
      };
      
      
 });
-console.log(paymentMenu.value)
+// console.log(paymentMenu.value)
 /* EventListener for Real Time */
 
 name.addEventListener('input', (e) => {
