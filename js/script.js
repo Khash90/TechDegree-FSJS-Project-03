@@ -300,26 +300,25 @@ const cvvValidator = (e) => {
         
     }
 }
-const bitAndPalValidator = (e) => {
-    if (e.targe.value === 'bitcoin' || e.target.value === "paypal") {
-        return true;
-    }
-}
+// const bitAndPalValidator = (e) => {
+//     if (e.targe.value === 'bitcoin' || e.target.value === "paypal") {
+//         return true;
+//     }
+// }
 //form listener on submit
 form.addEventListener('submit' ,(e) => {
     //  e.preventDefault();
      nameValidator(e);
      emailValidator(e);
      activityValidator(e);
-     if (paymentMenu.children[1]){
+     if (paymentMenu.target.value === 'Credit Card'){
         expMonthValidator(e);
         expYearValidator(e);
-       ccNumberValidator(e);
-       zipCodeValidator(e);
-       cvvValidator(e);
-     }else if (paymentMenu.children[2] || paymentMenu.children[3]){
-        bitAndPalValidator();
+        ccNumberValidator(e);
+        zipCodeValidator(e);
+        cvvValidator(e);
      }
+   
     
   
      
